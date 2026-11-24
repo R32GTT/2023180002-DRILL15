@@ -51,7 +51,7 @@ class Zombie:
         if self.dir < 0:
             image.composite_draw(0, 'h', self.x, self.y, self.size * 100, self.size * 100)
         else:
-            image.draw(self.x, self.y, 200, 200)
+            image.draw(self.x, self.y, self.size * 100, self.size * 100)
         draw_rectangle(*self.get_bb())
 
     def get_bb(self):
@@ -59,5 +59,7 @@ class Zombie:
 
     def handle_collision(self, group, other):
             if group == "ball:zombie":
-                print("balls")
+                self.size -= 1
+                if self.size <= 0:
+                    game_world.remove_object(self)
             
